@@ -7,7 +7,9 @@ import { PrismaClient } from "./generated/prisma";
 // データベース接続の準備
 const pool = new Pool({ 
   connectionString: process.env.DATABASE_URL,
-  ssl: true
+  ssl: {
+    rejectUnauthorized: false // 証明書のチェックを少し緩める魔法の言葉じゃ
+  }
 });
 
 const adapter = new PrismaPg(pool);
